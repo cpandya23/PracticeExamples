@@ -12,7 +12,7 @@ public class Prototype {
 		EmployeePrototype emp3= (EmployeePrototype) emp1.clone();
 		emp3.addData();
 		
-		System.out.println(emp1.getData());
+		System.out.println(emp1.getData()==emp2.getData());
 		System.out.println(emp2.getData());
 		System.out.println(emp3.getData());
 	}
@@ -25,9 +25,9 @@ class EmployeePrototype implements Cloneable {
 
 	}
 
-	EmployeePrototype(List<String> list) {
+	/*EmployeePrototype(List<String> list) {
 		this.list = list;
-	}
+	}*/
 
 	public void addData() {
 		if(list==null) {
@@ -44,12 +44,13 @@ class EmployeePrototype implements Cloneable {
 	@Override
 	public Object clone() throws CloneNotSupportedException{
 		List<String> templist = new ArrayList<>();
-
+		templist.add("Cloned");
 		for (String x : getData()) {
 			templist.add(x);
 		}
-
-		return new EmployeePrototype(templist);
+		EmployeePrototype emp1=(EmployeePrototype) super.clone();
+		emp1.list=templist;
+		return emp1;
 	}
 
 }
